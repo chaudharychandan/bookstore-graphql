@@ -4,19 +4,23 @@ const {
   GraphQLObjectType,
   GraphQLString,
   GraphQLSchema,
-  GraphQLID
+  GraphQLID,
+  GraphQLList
 } = graphql;
 
 const books = [
   { title: 'A', genre: 'A', id: '1', authorId: '1' },
   { title: 'B', genre: 'B', id: '2', authorId: '2' },
-  { title: 'C', genre: 'C', id: '3', authorId: '3' }
+  { title: 'C', genre: 'C', id: '3', authorId: '3' },
+  { title: 'D', genre: 'D', id: '4', authorId: '3' },
+  { title: 'E', genre: 'E', id: '5', authorId: '1' },
+  { title: 'F', genre: 'F', id: '6', authorId: '3' }
 ];
 
 const authors = [
-  { name: 'D', city: 'X', id: '1' },
-  { name: 'E', city: 'Y', id: '2' },
-  { name: 'F', city: 'Z', id: '3' }
+  { name: 'X', city: 'X', id: '1' },
+  { name: 'X', city: 'Y', id: '2' },
+  { name: 'X', city: 'Z', id: '3' }
 ];
 
 const BookType = new GraphQLObjectType({
@@ -40,7 +44,14 @@ const AuthorType = new GraphQLObjectType({
   fields: () => ({
     id: { type: GraphQLID },
     name: { type: GraphQLString },
-    city: { type: GraphQLString }
+    city: { type: GraphQLString },
+    books: {
+      type: new GraphQLList(BookType),
+      resolve(parent, args) {
+        const { id } = parent;
+        return books.filter((book) => book.authorId === id);
+      }
+    }
   })
 });
 
