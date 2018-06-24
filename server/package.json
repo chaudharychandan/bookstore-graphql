@@ -1,0 +1,13 @@
+{
+  "name": "graphql-express-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Chandan Kumar",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.3"
+  },
+  "scripts": {
+    "start": "nodemon ./"
+  }
+}
