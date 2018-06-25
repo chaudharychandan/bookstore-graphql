@@ -36,7 +36,8 @@ class AddBook extends Component {
         title,
         genre,
         authorId
-      }
+      },
+      refetchQueries: [{ query: getBooksQuery }]
     });
   }
 
