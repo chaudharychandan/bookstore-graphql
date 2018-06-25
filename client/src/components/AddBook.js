@@ -9,7 +9,7 @@ class AddBook extends Component {
     this.state = {
       title: '',
       genre: '',
-      authorId: null
+      authorId: ""
     }
   }
 
@@ -39,6 +39,12 @@ class AddBook extends Component {
       },
       refetchQueries: [{ query: getBooksQuery }]
     });
+
+    this.setState({
+      title: '',
+      genre: '',
+      authorId: ""
+    })
   }
 
   render() {
@@ -46,20 +52,20 @@ class AddBook extends Component {
       <form id="add-book" onSubmit={this.onSubmit}>
         <div className="field">
           <label>Book title:</label>
-          <input type="text" onChange={(event) => this.setState({ title: event.target.value })} required />
+          <input type="text" value={this.state.title} onChange={(event) => this.setState({ title: event.target.value })} required />
         </div>
         <div className="field">
           <label>Genre:</label>
-          <input type="text" onChange={(event) => this.setState({ genre: event.target.value })} required />
+          <input type="text" value={this.state.genre} onChange={(event) => this.setState({ genre: event.target.value })} required />
         </div>
         <div className="field">
           <label>Author:</label>
-          <select onChange={(event) => this.setState({ authorId: event.target.value })} required >
+          <select value={this.state.authorId} onChange={(event) => this.setState({ authorId: event.target.value })} required >
             <option value="">Select Author</option>
             {this.displayAuthors()}
           </select>
         </div>
-        <button>+</button>
+        <button>Add</button>
       </form>
     );
   }
